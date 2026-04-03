@@ -1,0 +1,163 @@
+# AI记忆系统 - 模式检测配置
+# 位置: ai-memory-system/Meta/config/pattern-detection.yaml
+
+version: "1.0"
+last_updated: "2026-04-02"
+
+# ═══════════════════════════════════════════════════════════════
+# L2 行为层检测配置
+# ═══════════════════════════════════════════════════════════════
+
+l2_detection:
+  # 基础阈值
+  threshold:
+    min_occurrences: 3              # 最少触发次数
+    time_window_days: 30            # 时间窗口
+    
+  # 相似度阈值
+  similarity:
+    semantic_threshold: 0.85        # 语义向量相似度 (余弦)
+    keyword_overlap: 0.6            # 关键词重叠 (Jaccard)
+    
+  # 时间衰减因子
+  time_decay:
+    within_7_days: 1.0
+    within_30_days: 0.9
+    within_90_days: 0.7
+    beyond_90_days: 0.5
+    
+  # 来源权重
+  source_weights:
+    observation: 0.8                # 纯观察
+    user_declaration: 1.0           # 用户明确声明
+    mixed: 0.9                      # 混合来源
+    
+  # 置信度映射
+  confidence:
+    high_threshold: 0.8
+    medium_threshold: 0.6
+    low_threshold: 0.4
+    
+  # 例外情况 (降低阈值的触发条件)
+  exceptions:
+    explicit_phrases:               # 明确声明短语
+      - "我总是"
+      - "我的习惯是"
+      - "我倾向于"
+      - "这是我的原则"
+    correction_signals:             # 纠正信号
+      - "我都说了"
+      - "我跟你说过"
+      - "你怎么没记住"
+      - "不是跟你说过了吗"
+
+# ═══════════════════════════════════════════════════════════════
+# L3 认知层检测配置
+# ═══════════════════════════════════════════════════════════════
+
+l3_detection:
+  # 聚合阈值
+  aggregation:
+    min_l2_patterns: 3              # 聚合所需最少L2模式
+    cross_scene_min: 3              # 跨场景最小数
+    stability_window_days: 90       # 稳定性检验窗口
+    
+  # 稳定性评分
+  stability:
+    time_weight: 0.4                # 跨时间稳定性权重
+    scene_weight: 0.4               # 跨场景一致性权重
+    consistency_weight: 0.2         # 行为一致性权重
+    
+  # L3 触发类型
+  triggers:
+    aggregation: true               # 多L2聚合
+    declaration: true               # 用户明确声明
+    stability: true                 # L2长期稳定
+    correction: true                # 用户纠正AI理解
+
+# ═══════════════════════════════════════════════════════════════
+# 分类映射
+# ═══════════════════════════════════════════════════════════════
+
+categories:
+  # L2 分类
+  l2:
+    - work-habits                  # 工作习惯
+    - communication-style          # 沟通风格
+    - thinking-style               # 思考风格
+    - decision-pattern             # 决策模式
+    - tool-usage                   # 工具使用
+    - time-management              # 时间管理
+    - preference                   # 偏好
+    
+  # L3 分类
+  l3:
+    - thinking-pattern             # 思维模式
+    - decision-framework           # 决策框架
+    - mental-model                 # 心智模型
+    - knowledge-structure          # 知识结构
+    - value-priority               # 价值优先级
+
+# ═══════════════════════════════════════════════════════════════
+# 文件路径配置
+# ═══════════════════════════════════════════════════════════════
+
+paths:
+  l1_source: "Memory/L1-episodic"
+  l2_target: "Memory/L2-procedural"
+  l3_target: "Memory/L3-semantic"
+  insights: "Meta/insights"
+  reviews: "Meta/reviews"
+  templates: "Meta/templates"
+  
+# ═══════════════════════════════════════════════════════════════
+# 输出格式配置
+# ═══════════════════════════════════════════════════════════════
+
+output:
+  candidate_file_pattern: "{type}-candidates-{date}.json"
+  encoding: "utf-8"
+  indent: 2
+  
+# ═══════════════════════════════════════════════════════════════
+# 审核与限制
+# ═══════════════════════════════════════════════════════════════
+
+safeguards:
+  # 禁止自动检测的内容
+  skip_patterns:
+    - password
+    - secret
+    - token
+    - private
+    - personal
+    
+  # 需要额外确认的内容
+  sensitive_categories:
+    - value_judgment
+    - identity_belief
+    - emotional_pattern
+    - relationship_pattern
+    
+  # L4 层保护
+  l4_protection:
+    auto_detect: false              # 永不自动检测L4
+    manual_only: true               # 仅人工修改
+
+# ═══════════════════════════════════════════════════════════════
+# Heartbeat 检查配置
+# ═══════════════════════════════════════════════════════════════
+
+heartbeat:
+  check_frequency: "daily"
+  reminder_threshold: 3             # 等待3天后提醒
+  batch_reminder_count: 5           # 累积5个候选后批量提醒
+
+# ═══════════════════════════════════════════════════════════════
+# 演进追踪
+# ═══════════════════════════════════════════════════════════════
+
+evolution_tracking:
+  record_rejections: true           # 记录拒绝历史
+  analyze_false_positives: true     # 分析误判
+  auto_tune_thresholds: false       # 是否自动调整阈值 (需人工确认)

@@ -1,0 +1,25 @@
+{
+  "lastCheck": "2026-03-30T09:00:00+08:00",
+  "lastWeeklyReview": "2026-03-30",
+  "nextWeeklyReview": "2026-04-06",
+  "pendingReviews": [],
+  "candidatesL2": [
+    "系统化思维",
+    "先底层后上层",
+    "物理主义倾向",
+    "哲学反思",
+    "边界意识强",
+    "主动设计型",
+    "结构化偏好"
+  ],
+  "candidatesL3": [
+    "架构优先思维",
+    "第一性原理设计"
+  ],
+  "archiveQueue": [
+    "2026-03-05-memory-system-init.md",
+    "2026-03-06-multiagent-world-design.md"
+  ],
+  "reviewCount": 3,
+  "lastReviewSummary": "2026-W13: 无新增L1事件，3个文件待归档，L2模式稳定"
+}

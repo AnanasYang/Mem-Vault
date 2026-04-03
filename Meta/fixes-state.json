@@ -1,0 +1,34 @@
+{
+  "projectId": "agent-os-fixes-2026-04-02",
+  "projectName": "Agent Memory OS 问题修复",
+  "status": "running",
+  "startTime": "2026-04-02T14:44:00Z",
+  "managerSession": "agent:main:subagent:8d3d665a-f91a-4c26-879a-f5c785d19e9b",
+  "issues": {
+    "issue-1-content-depth": {
+      "title": "每层内容过于简略",
+      "status": "analyzing",
+      "priority": "high",
+      "files": ["daily-dream-integrated.mjs", "weekly-dream-integrated.mjs"]
+    },
+    "issue-2-i18n": {
+      "title": "语言切换不完整",
+      "status": "analyzing",
+      "priority": "high",
+      "files": ["navigation.tsx", "language-provider.tsx"]
+    },
+    "issue-3-l0-empty": {
+      "title": "L0层无内容",
+      "status": "analyzing",
+      "priority": "high",
+      "files": ["l0/page.tsx", "data-api.js"]
+    },
+    "issue-4-timeline": {
+      "title": "时间轴异常（2025年数据）",
+      "status": "analyzing",
+      "priority": "medium",
+      "files": ["timeline/page.tsx", "data.ts"]
+    }
+  },
+  "nextHeartbeat": "2026-04-02T14:49:00Z"
+}

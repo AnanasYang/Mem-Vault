@@ -1,0 +1,54 @@
+[
+  {
+    "id": "candidate-001",
+    "name": "代码审查前自动运行 linter",
+    "description": "在提交代码审查之前，应该自动运行 linter 检查代码风格，确保代码符合项目规范。",
+    "confidence": 0.85,
+    "source": "L1-episodic/workflow-patterns.md",
+    "occurrences": 5,
+    "level": "L2",
+    "type": "workflow",
+    "createdAt": "2026-04-01T10:30:00Z",
+    "status": "pending",
+    "details": "观察到的模式：\n1. 每次代码审查前手动运行 npm run lint\n2. 发现的问题需要反复修改\n3. 自动化可以节省时间和减少遗漏",
+    "evidence": [
+      "2026-03-28: 审查时发现缺少分号",
+      "2026-03-30: 变量命名不规范被指出",
+      "2026-04-01: 重复的类型错误"
+    ]
+  },
+  {
+    "id": "candidate-002",
+    "name": "优先使用 Zustand 进行状态管理",
+    "description": "在 React 项目中，优先选择 Zustand 而非 Redux 进行全局状态管理，因其更轻量、API 更简洁。",
+    "confidence": 0.92,
+    "source": "L1-episodic/tech-decisions.md",
+    "occurrences": 8,
+    "level": "L3",
+    "type": "principle",
+    "createdAt": "2026-04-01T14:20:00Z",
+    "status": "pending",
+    "details": "项目中的技术选型原则：\n- Redux 配置繁琐，需要大量样板代码\n- Zustand 的 API 更直观，学习成本低\n- 已经在新项目中成功应用",
+    "evidence": [
+      "agent-os 项目使用 Zustand 成功",
+      "相比 Redux 减少了 60% 的状态管理代码"
+    ]
+  },
+  {
+    "id": "candidate-003",
+    "name": "API 错误处理统一返回 500 状态码",
+    "description": "后端 API 在处理错误时统一返回 500 状态码，并在响应体中包含详细的错误信息。",
+    "confidence": 0.65,
+    "source": "L1-episodic/api-patterns.md",
+    "occurrences": 3,
+    "level": "L2",
+    "type": "api-design",
+    "createdAt": "2026-04-02T09:15:00Z",
+    "status": "pending",
+    "details": "当前 API 错误处理方式不统一，有些返回 400，有些返回 500。建议统一返回 500，通过 error 字段区分错误类型。",
+    "evidence": [
+      "/api/l1 返回 500",
+      "/api/l2 返回 400"
+    ]
+  }
+]
