@@ -37,3 +37,10 @@ status:
 review:
 	@echo "📝 Pending Reviews:"
 	@find Memory/L2-procedural -name '*.md' -exec grep -l 'review_status: pending' {} \; 2>/dev/null || echo "No pending reviews"
+
+# Dreams commands
+dreams-status:
+	@node scripts/dream-dashboard.mjs
+
+dreams-install:
+	@node scripts/dream-scheduler.mjs install
