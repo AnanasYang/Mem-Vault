@@ -12,7 +12,7 @@ dream-generated: true
 ## 本周 L1 记忆统计
 - 新增记忆: 7
 - 待 Review: 7
-- L2 候选数: 42
+- L2 候选数: 44
 
 ## 今日生成
 - Memory ID: L1-2026-04-13-001
