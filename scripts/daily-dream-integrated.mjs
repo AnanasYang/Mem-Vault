@@ -66,14 +66,74 @@ function getNextSequence(level, date) {
   }
 }
 
-// 从 OpenClaw sessions 读取今日对话
+// 从 L0 文件读取今日对话（替代直接从 sessions 读取）
 function collectTodayConversations() {
   const conversations = [];
   const sessionIds = new Set();
   let minTimestamp = null;
   let maxTimestamp = null;
   
-  // 读取 session 文件
+  // 读取 L0 文件
+  const l0File = join(L0_DIR, `daily-${DATE_STR}.jsonl`);
+  
+  if (existsSync(l0File)) {
+    const content = readFileSync(l0File, 'utf-8');
+    const lines = content.split('\n').filter(l => l.trim());
+    
+    for (const line of lines) {
+      try {
+        const record = JSON.parse(line);
+        if (record.ts && record.role && record.content) {
+          conversations.push({
+            ts: record.ts,
+            role: record.role,
+            content: record.content,
+            sessionId: record.sessionId || 'unknown'
+          });
+          sessionIds.add(record.sessionId || 'unknown');
+          
+          // 记录时间范围
+          if (!minTimestamp || record.ts < minTimestamp) {
+            minTimestamp = record.ts;
+          }
+          if (!maxTimestamp || record.ts > maxTimestamp) {
+            maxTimestamp = record.ts;
+          }
+        }
+      } catch (e) {
+        // 跳过无效行
+      }
+    }
+  }
+  
+  // 如果 L0 不存在，回退到直接从 sessions 读取（兼容旧数据）
+  if (conversations.length === 0) {
+    console.log('  ⚠️ L0 文件不存在，回退到 sessions...');
+    return collectTodayConversationsFromSessions();
+  }
+  
+  return {
+    conversations: conversations.sort((a, b) => new Date(a.ts) - new Date(b.ts)),
+    sources: {
+      level: 'L0',
+      l0File: l0File,
+      sessionIds: Array.from(sessionIds),
+      timestampRange: {
+        start: minTimestamp,
+        end: maxTimestamp
+      },
+      messageCount: conversations.length
+    }
+  };
+}
+
+// 回退方案：直接从 sessions 读取（用于兼容旧数据）
+function collectTodayConversationsFromSessions() {
+  const conversations = [];
+  const sessionIds = new Set();
+  let minTimestamp = null;
+  let maxTimestamp = null;
+  
   const sessionsDir = join(process.env.HOME, '.openclaw', 'agents', 'main', 'sessions');
   if (existsSync(sessionsDir)) {
     const files = readdirSync(sessionsDir).filter(f => f.endsWith('.jsonl'));
@@ -96,7 +156,6 @@ function collectTodayConversations() {
               });
               sessionIds.add(record.id);
               
-              // 记录时间范围
               if (!minTimestamp || record.timestamp < minTimestamp) {
                 minTimestamp = record.timestamp;
               }
@@ -113,6 +172,7 @@ function collectTodayConversations() {
   return {
     conversations: conversations.sort((a, b) => a.ts - b.ts),
     sources: {
+      level: 'L0',
       sessionIds: Array.from(sessionIds),
       timestampRange: {
         start: minTimestamp ? new Date(minTimestamp).toISOString() : null,
