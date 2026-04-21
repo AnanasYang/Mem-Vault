@@ -1,87 +1,91 @@
-# AI Memory System
+# Memory Core 🧠
 
-基于 5 层记忆架构 + Intent 轨道 + Meta 元数据的用户画像系统。
+Bruce 的专属记忆系统 —— 基于 5 层神经记忆架构 + Intent 轨道 + Meta 元数据的 AI 记忆引擎。
 
-## 目录结构
-
-```
-ai-memory-system/
-├── README.md                 # 本文件
-├── Memory/                   # 被动沉淀轨道（从对话自动提炼）
-│   ├── L0-state/            # 状态层：当前会话上下文
-│   ├── L1-episodic/         # 情境层：近期对话摘要（每周review）
-│   ├── L2-procedural/       # 行为层：习惯与偏好（每月review）
-│   ├── L3-semantic/         # 认知层：思维模式（每季度review）
-│   └── L4-core/             # 核心层：价值观与身份（每年/人工）
-├── Intent/                   # 主动输入轨道（用户主动设定）
-│   ├── goals/               # 目标与规划
-│   │   ├── short-term/      # 短期目标（< 3个月）
-│   │   ├── mid-term/        # 中期目标（3-12个月）
-│   │   └── long-term/       # 长期目标（> 1年）
-│   ├── preferences/         # 偏好与要求
-│   │   ├── communication/   # 沟通偏好
-│   │   ├── workflow/        # 工作流偏好
-│   │   └── tools/           # 工具偏好
-│   ├── boundaries/          # 约束与边界
-│   │   ├── hard-limits/     # 硬性红线
-│   │   ├── soft-limits/     # 软性约束
-│   │   └── decision-rules/  # 决策边界
-│   └── active/              # 当前活跃的意图清单
-├── Meta/                     # 系统元数据
-│   ├── reviews/             # 复盘记录
-│   │   ├── weekly/          # 每周复盘（L1）
-│   │   ├── monthly/         # 每月复盘（L2）
-│   │   ├── quarterly/       # 每季度复盘（L3）
-│   │   └── annual/          # 年度复盘（L4）
-│   ├── evolutions/          # 演变历史
-│   │   ├── L1-changes/
-│   │   ├── L2-changes/
-│   │   ├── L3-changes/
-│   └── insights/            # AI 检测到的模式
-└── archive/                  # 归档存储
-    └── L1/                  # L1 超过 30 天归档至此
-```
-
-## 文件格式规范
-
-所有文件使用 Markdown + YAML Frontmatter：
-
-```markdown
----
-level: L1                      # L0-L4 / Intent / Meta
-category: episodic            # 细分分类
-created: 2026-03-05           # 创建日期
-updated: 2026-03-05           # 更新日期
-source: 对话观察               # 来源：对话观察/用户声明/推断
-confidence: high              # 置信度：high/medium/low
-reviewed: 2026-03-05          # 最后 review 日期
----
-
-# 标题
-
-内容...
-```
-
-## 沉淀规则
-
-| 层级 | 沉淀条件 | Review 频率 |
-|------|---------|------------|
-| L1 情境 | 会话结束 / 10轮对话 / 重要事件 | **每周** |
-| L2 行为 | 同一模式出现 3 次 | **每月** |
-| L3 认知 | 稳定思维模式 / 多习惯指向同一框架 | **每季度** |
-| L4 核心 | 价值驱动 / 信念浮现 / **仅人工修改** | **每年/触发** |
-
-## 归档策略
-
-- L1：30 天后移入 `archive/L1/YYYY-MM/`，保留不删除
-- L2-L4：长期保留
-
-## 触发方式
-
-1. **定时触发**：Cron 每周/月/季度提醒
-2. **条件触发**：Heartbeat 检测模式满足时
-3. **主动触发**：用户说"帮我 review"
+> **全自动运行**：所有记忆沉淀、review、归档无需人工干预，后台静默完成。
 
 ---
 
-*系统初始化日期：2026-03-05*
+## 架构概览
+
+```
+memory-core/
+├── Memory/              # 5层被动沉淀轨道
+│   ├── L0-state/        # 原始数据层（实时消息流）
+│   ├── L1-episodic/     # 情境记忆层（每日回顾）
+│   ├── L2-procedural/   # 行为模式层（习惯沉淀）
+│   ├── L3-semantic/     # 认知框架层（思维模型）
+│   └── L4-core/         # 核心身份层（价值观）
+├── Intent/              # 主动意图轨道
+│   ├── goals/           # 目标体系
+│   ├── preferences/     # 偏好设定
+│   └── boundaries/      # 约束边界
+├── Meta/                # 系统元数据
+│   ├── config/          # 触发规则配置
+│   ├── reviews/         # 自动复盘记录
+│   └── trace-mappings/  # 记忆溯源映射
+├── scripts/             # 自动化脚本
+│   ├── capture-l0.js           # L0 数据捕获
+│   ├── daily-dream-integrated.mjs   # 每日记忆生成
+│   ├── weekly-dream.mjs       # 每周记忆生成
+│   └── sync-github.sh         # GitHub 同步
+└── cron/                # 定时任务配置
+```
+
+---
+
+## 记忆层级
+
+| 层级 | 名称 | 内容 | 更新频率 | Review |
+|------|------|------|----------|--------|
+| **L0** | 原始数据 | 会话消息、操作日志 | 实时 | — |
+| **L1** | 情境记忆 | 每日对话回顾、事件记录 | 每天 23:00 | 每周 |
+| **L2** | 行为模式 | 重复习惯、工作偏好 | 自动检测 | 每月 |
+| **L3** | 认知框架 | 思维模式、决策原则 | 自动检测 | 每季度 |
+| **L4** | 核心身份 | 价值观、人生信念 | 观察沉淀 | 每年 |
+
+---
+
+## 自动运行机制
+
+### 每日任务
+- **23:00** — `daily-dream`：生成当日 L1 回顾
+- **01:00** — `sync-github`：推送数据到 GitHub
+
+### 每周任务
+- **周一 9:00** — `L1-weekly-review`：周度记忆复盘
+- **周日 22:00** — `weekly-dream`：周度记忆沉淀
+
+### 每月任务
+- **每月 1 日 9:00** — `L2-monthly-review`：行为模式 review
+
+### 每季度任务
+- **季度首日 9:00** — `L3-quarterly-review`：认知框架 review
+
+---
+
+## 文件规范
+
+所有记忆文件使用 Markdown + YAML Frontmatter：
+
+```yaml
+---
+level: L1
+memory_id: L1-2026-04-21-001
+created: 2026-04-21
+updated: 2026-04-21
+source: 对话观察
+confidence: high
+reviewed: 2026-04-21
+---
+```
+
+---
+
+## 关联项目
+
+- [**memory-galaxy**](https://github.com/AnanasYang/memory-galaxy) — 记忆可视化界面，从本系统读取数据展示
+
+---
+
+*系统初始化：2026-03-05 | 全自动模式启用：2026-04-21*
