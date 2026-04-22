@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=oneshot
-ExecStart=/home/bruce/.openclaw/workspace/ai-memory-system/scripts/auto-sync.sh
+ExecStart=/home/bruce/.openclaw/workspace/memory-core/scripts/auto-sync.sh
 User=bruce
 
 [Install]

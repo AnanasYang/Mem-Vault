@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 const SESSIONS_DIR = process.env.HOME + '/.openclaw/agents/main/sessions';
-const OUTPUT_DIR = process.env.HOME + '/.openclaw/workspace/ai-memory-system/Memory/L0-state';
+const OUTPUT_DIR = process.env.HOME + '/.openclaw/workspace/memory-core/Memory/L0-state';
 const DATE = process.argv[2] || new Date().toISOString().split('T')[0];
 const OUTPUT_FILE = path.join(OUTPUT_DIR, `daily-${DATE}.jsonl`);
 

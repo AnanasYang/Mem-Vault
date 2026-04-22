@@ -7,7 +7,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
-const MEMORY_ROOT = process.env.MEMORY_ROOT || '/home/bruce/.openclaw/workspace/ai-memory-system';
+const MEMORY_ROOT = process.env.MEMORY_ROOT || '/home/bruce/.openclaw/workspace/memory-core';
 const L1_DIR = join(MEMORY_ROOT, 'Memory', 'L1-episodic');
 const L2_DIR = join(MEMORY_ROOT, 'Memory', 'L2-procedural');
 const PATTERN_THRESHOLD = 3; // 模式出现阈值

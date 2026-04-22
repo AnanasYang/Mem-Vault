@@ -8,7 +8,7 @@ import { execSync } from 'child_process';
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 
-const MEMORY_ROOT = process.env.MEMORY_ROOT || '/home/bruce/.openclaw/workspace/ai-memory-system';
+const MEMORY_ROOT = process.env.MEMORY_ROOT || '/home/bruce/.openclaw/workspace/memory-core';
 const L0_DIR = join(MEMORY_ROOT, 'Memory', 'L0-state');
 const L1_DIR = join(MEMORY_ROOT, 'Memory', 'L1-episodic');
 

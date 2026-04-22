@@ -6,7 +6,7 @@ set -e
 
 # Config
 SESSIONS_DIR="${HOME}/.openclaw/agents/main/sessions"
-OUTPUT_DIR="${HOME}/.openclaw/workspace/ai-memory-system/Memory/L0-state"
+OUTPUT_DIR="${HOME}/.openclaw/workspace/memory-core/Memory/L0-state"
 DATE="${1:-$(date +%Y-%m-%d)}"
 OUTPUT_FILE="${OUTPUT_DIR}/daily-${DATE}.jsonl"
 

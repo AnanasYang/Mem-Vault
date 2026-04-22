@@ -4,7 +4,7 @@
 
 set -e
 
-MEMORY_DIR="/home/bruce/.openclaw/workspace/ai-memory-system"
+MEMORY_DIR="/home/bruce/.openclaw/workspace/memory-core"
 LOG_FILE="$MEMORY_DIR/.sync.log"
 LOCK_FILE="/tmp/memory-sync.lock"
 

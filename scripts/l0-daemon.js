@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 const SESSIONS_DIR = process.env.OPENCLAW_SESSIONS_DIR || `${process.env.HOME}/.openclaw/agents/main/sessions`;
-const L0_DIR = `${process.env.HOME}/.openclaw/workspace/ai-memory-system/Memory/L0-state`;
+const L0_DIR = `${process.env.HOME}/.openclaw/workspace/memory-core/Memory/L0-state`;
 const CHECK_INTERVAL = parseInt(process.argv[2]) || 30000; // 默认30秒
 
 // 记录已处理的文件和位置

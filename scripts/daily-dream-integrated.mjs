@@ -2,7 +2,7 @@
 /**
  * Daily Dream - AI Memory System 集成版 (Phase 2: 追溯系统)
  * 
- * 输出到：ai-memory-system/Memory/L1-episodic/
+ * 输出到：memory-core/Memory/L1-episodic/
  * 同时更新：Meta/reviews/weekly/
  * 
  * 更新内容：

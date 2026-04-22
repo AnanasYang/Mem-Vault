@@ -9,7 +9,7 @@ const path = require('path');
 
 // Config
 const SESSIONS_DIR = process.env.OPENCLAW_SESSIONS_DIR || `${process.env.HOME}/.openclaw/agents/main/sessions`;
-const OUTPUT_DIR = `${process.env.HOME}/.openclaw/workspace/ai-memory-system/Memory/L0-state`;
+const OUTPUT_DIR = `${process.env.HOME}/.openclaw/workspace/memory-core/Memory/L0-state`;
 
 // Get today's date string
 function getTodayStr() {

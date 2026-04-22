@@ -9,7 +9,7 @@
 import { readFileSync, readdirSync, existsSync } from 'fs';
 import { join } from 'path';
 
-const MEMORY_ROOT = process.env.MEMORY_ROOT || '/home/bruce/.openclaw/workspace/ai-memory-system';
+const MEMORY_ROOT = process.env.MEMORY_ROOT || '/home/bruce/.openclaw/workspace/memory-core';
 const L2_DIR = join(MEMORY_ROOT, 'Memory', 'L2-procedural');
 const CANDIDATE_DIR = join(MEMORY_ROOT, 'Meta', 'candidates', 'L3');
 

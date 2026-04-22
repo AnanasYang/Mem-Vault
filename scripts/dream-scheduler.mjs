@@ -7,7 +7,7 @@
 import { execSync } from 'child_process';
 import { existsSync } from 'fs';
 
-const MEMORY_ROOT = process.env.MEMORY_ROOT || '/home/bruce/.openclaw/workspace/ai-memory-system';
+const MEMORY_ROOT = process.env.MEMORY_ROOT || '/home/bruce/.openclaw/workspace/memory-core';
 
 const SCHEDULE = {
   daily: {
