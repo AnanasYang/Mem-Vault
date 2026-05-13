@@ -1,0 +1,28 @@
+{
+  "memory_id": "L1-2026-05-13-001",
+  "level": "L1",
+  "created": "2026-05-13",
+  "sources": {
+    "level": "L0",
+    "l0File": "/home/bruce/.openclaw/workspace/memory-core/Memory/L0-state/daily-2026-05-13.jsonl",
+    "sessionIds": [
+      "77fe31bd-6eb6-4c30-b422-376b173ddf37",
+      "0fd40a72-618c-42b0-8a68-8bd75241ac96",
+      "8f780798-01d4-4b1b-86c9-f2da1c0e001d",
+      "baf86dbd-47ce-4779-bee9-888067e4ee76",
+      "8f044636-22a8-4c8c-aa1f-d1123b6a3653",
+      "d32e24d1-ca63-4453-9721-8d94e376cfb7",
+      "bcaddfd2-eafd-4b49-a853-efdb5680c2a7",
+      "1bf3c0fa-4147-41f7-85f2-3d36a8292172",
+      "3c816ae1-d699-41f6-933a-35bb6329bc80",
+      "a21fb21d-3dc3-43c0-8b93-103798024f44",
+      "df7c4321-009d-40a5-850a-824650de5612",
+      "537eb501-ce16-49a4-a3a2-4512f79112e1"
+    ],
+    "timestampRange": {
+      "start": "2026-05-13T02:57:12.036Z",
+      "end": "2026-05-13T14:57:41.868Z"
+    },
+    "messageCount": 25
+  }
+}
